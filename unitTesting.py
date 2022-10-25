@@ -4,13 +4,17 @@ import unittest
 from CSV_Combiner import CSV_Combiner
 from io import StringIO
 
+import pandas as pd
+
 
 class test_csv_combiner(unittest.TestCase):
 
     output_path = './test/combined.csv'
     script_path = './CSV_Combiner.py'
     blank_csv_path = './test/blank.csv'
-    test_fixtures_path = './test/fixtures'
+    test_fixture_path1 = './test/fixtures/clothing.csv'
+    test_fixture_path2 = './test/fixtures/accessories.csv'
+
     random_extension_files_path = './test/random_files'
 
     # instantiate combiner object
@@ -63,7 +67,9 @@ class test_csv_combiner(unittest.TestCase):
 
     # test 5
     def test_filesource_column(self):
-        argv = [self.script_path] + os.listdir(self.test_fixtures_path)
+        # os.listdir not working, manually pass file path
+        argv = [self.script_path, './test/fixtures/clothing.csv',
+                './test/fixtures/accessories.csv']
         self.combiner_object.combiner(argv)
 
         self.output_test.write(self.output.getvalue())
