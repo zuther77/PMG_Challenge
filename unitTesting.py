@@ -1,11 +1,8 @@
 import os
 import sys
-import csv
-import pathlib
 import unittest
 from CSV_Combiner import CSV_Combiner
 from io import StringIO
-import pandas as pd
 
 
 class test_csv_combiner(unittest.TestCase):
