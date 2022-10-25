@@ -1,7 +1,8 @@
 ## PMG Graduate Leadership Program - Software Engineering Programming Challenge
 Thank you PMG for giving me this opportunity. I used python3 to solve the challenge. I have used standard libraries for all scripts as well as unit testing which come preinstalled with python3. 
 
-I modified the generatefixture.py file a bit to make new fixture directory
+I modified the generatefixture.py file a bit to make new fixture directory. I could have used pandas to make life easier but loading each file into memory can be costly,
+given the file sizes can be >2GB
 
 
 
