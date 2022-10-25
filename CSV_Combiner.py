@@ -13,7 +13,7 @@ class CSV_Combiner():
         if len(argv) < 2:
             print("Error: No files provided")
             print(
-                "Script Usage: python CSV_combiner.py ./file1.csv ./file2.csv  ./file3.csv  ")
+                "Script Usage: python CSV_combiner.py ./path/file1.csv ./path/file2.csv  ./path/file3.csv  ")
             return False
 
         csv_files = argv[1:]
