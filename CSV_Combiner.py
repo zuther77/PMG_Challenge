@@ -7,15 +7,13 @@ import sys
 class CSV_Combiner():
     def __init__(self) -> None:
         super().__init__()
-        # fixture_path = os.walk()
 
-    @classmethod
     def file_validation(self, argv) -> bool:
         # print(argv)
         if len(argv) < 2:
             print("Error: No files provided")
-            # print(
-            #     "Script Usage: python CSV_combiner.py ./file1.csv ./file2.csv  ./file3.csv  ")
+            print(
+                "Script Usage: python CSV_combiner.py ./file1.csv ./file2.csv  ./file3.csv  ")
             return False
 
         csv_files = argv[1:]
