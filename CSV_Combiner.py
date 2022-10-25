@@ -83,12 +83,15 @@ class CSV_Combiner():
 
                             # Add rest to the target file
                             for line in current_file:
-                                line_list = line.strip().split(',')
-                                file_location = os.path.basename(filename)
-                                line_list.append(file_location)
-                                print(",".join(line_list).replace(
-                                    '"', ''))
-                                writer.writerow(line_list)
+                                if len(line) > 1:
+                                    line_list = line.strip().split(',')
+                                    # print(line_list, len(line_list))
+                                    file_location = os.path.basename(filename)
+                                    line_list.append(file_location)
+                                    print(",".join(line_list).replace(
+                                        '"', ''))
+                                    writer.writerow(line_list)
+                                    # sys.exit()
 
                     except StopIteration:
                         print("Blank file found and will be skipped")
