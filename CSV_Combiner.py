@@ -75,7 +75,7 @@ class CSV_Combiner():
 
                             # add header only once
                             header = next(current_file).strip().split(",")
-                            header.append("filename")
+                            header.append("\"filename\"")
                             if not header_saved:
                                 print(",".join(header).replace('"', ''))
                                 writer.writerow(header)
@@ -92,6 +92,10 @@ class CSV_Combiner():
 
                     except StopIteration:
                         print("Blank file found and will be skipped")
+
+        # remove combined.csv if the file was not written to
+        if os.path.exists('combined.csv') and os.stat('combined.csv').st_size == 0:
+            os.remove('combined.csv')
 
         return
 
