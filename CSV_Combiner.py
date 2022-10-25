@@ -77,7 +77,7 @@ class CSV_Combiner():
                             header = next(current_file).strip().split(",")
                             header.append("filename")
                             if not header_saved:
-                                print(header)
+                                print(",".join(header).replace('"', ''))
                                 writer.writerow(header)
                                 header_saved = True
 
@@ -86,7 +86,8 @@ class CSV_Combiner():
                                 line_list = line.strip().split(',')
                                 file_location = os.path.basename(filename)
                                 line_list.append(file_location)
-                                print(",".join(line_list))  # debug print
+                                print(",".join(line_list).replace(
+                                    '"', ''))
                                 writer.writerow(line_list)
 
                     except StopIteration:
