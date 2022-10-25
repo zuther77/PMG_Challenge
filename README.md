@@ -11,3 +11,7 @@ I modified the generatefixture.py file a bit to make new fixture directory
 - Script usage - ``` python CSV_Combiner.py ./path/file1.py ./path/file2.py ./path/file3.py ```
 - Script will generate "combined.csv" in the current working directory
 - comment line 81 and 91 in CSV_combiner.py if combined csv file is not needed 
+
+### Unit testing
+- Used uniitest module for this purpose
+- Run unit tests - ```python unitTesting.py```
