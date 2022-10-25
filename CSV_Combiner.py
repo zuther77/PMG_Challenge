@@ -85,13 +85,12 @@ class CSV_Combiner():
                             for line in current_file:
                                 if len(line) > 1:
                                     line_list = line.strip().split(',')
-                                    # print(line_list, len(line_list))
                                     file_location = os.path.basename(filename)
-                                    line_list.append(file_location)
+                                    line_list.append(
+                                        "\"" + file_location + "\"")
                                     print(",".join(line_list).replace(
                                         '"', ''))
                                     writer.writerow(line_list)
-                                    # sys.exit()
 
                     except StopIteration:
                         print("Blank file found and will be skipped")
