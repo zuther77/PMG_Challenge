@@ -4,8 +4,6 @@ import unittest
 from CSV_Combiner import CSV_Combiner
 from io import StringIO
 
-import pandas as pd
-
 
 class test_csv_combiner(unittest.TestCase):
 
@@ -79,6 +77,70 @@ class test_csv_combiner(unittest.TestCase):
             header = next(f)
 
         self.assertIn("filename", header)
+
+    # test 6
+    def test_header_only_added_once(self):
+        argv = [self.script_path, './test/fixtures/clothing.csv',
+                './test/fixtures/accessories.csv']
+        self.combiner_object.combiner(argv)
+
+        self.output_test.write(self.output.getvalue())
+        self.output_test.close()
+
+        # find length of the first file
+        counter = 0
+        with open(self.test_fixture_path1) as fileobject:
+            for line in fileobject:
+                counter += 1
+        # divide by 2 because there is a blank line after each line
+        counter = counter // 2
+
+        # decrement counter till we reach the end of first file in the combined csv
+        with open(self.output_path) as f:
+            header1 = next(f)
+            while counter != 0:
+                header2 = next(f)
+                counter -= 1
+
+        self.assertNotEqual(header1, header2)
+
+    def test_all_values_added(self):
+        argv = [self.script_path, './test/fixtures/clothing.csv',
+                './test/fixtures/accessories.csv', './test/fixtures/household_cleaners.csv']
+        self.combiner_object.combiner(argv)
+
+        self.output_test.write(self.output.getvalue())
+        self.output_test.close()
+
+        # find lengths of all files and match it with length of combined csv
+        # can be done my making pandas dataframe but loading them in memory would be costly
+
+        counter_file_1 = 0
+        counter_file_2 = 0
+        counter_file_3 = 0
+        with open(self.test_fixture_path1) as fileobject:
+            for _ in fileobject:
+                counter_file_1 += 1
+        with open(self.test_fixture_path1) as fileobject:
+            for _ in fileobject:
+                counter_file_2 += 1
+        with open(self.test_fixture_path1) as fileobject:
+            for _ in fileobject:
+                counter_file_3 += 1
+
+        # divide by 2 because there is a blank line after each line
+        counter_file_1 = counter_file_1 // 2
+        counter_file_2 = counter_file_2 // 2
+        counter_file_3 = counter_file_3 // 2
+        # add to find total count. Subtract 2 for repeated header
+        total_count = counter_file_1 + counter_file_2 + counter_file_3 - 2
+
+        counter_combined_csv = 0
+        with open(self.output_path) as f:
+            for line in f:
+                counter_combined_csv += 1
+
+        self.assertEqual(total_count, counter_combined_csv)
 
 
 if __name__ == "__main__":
